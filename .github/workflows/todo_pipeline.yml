@@ -28,6 +28,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run FastAPI tests
+      env:
+          DATABASE_URL: sqlite:///test.db
       run: python -m unittest to_do_api_tests.py
 
   frontend-job:
