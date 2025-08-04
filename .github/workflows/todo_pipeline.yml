@@ -1,0 +1,62 @@
+name: CI for FastAPI and React Native
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  fullStackJob:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: todoDb
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres_dato_2004
+    defaults:
+      run:
+        working-directory: ./toDofastApi-back
+    strategy:
+      matrix:
+        python-version: [3.11]	 
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y libpq-dev python3-dev build-essential
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run FastAPI tests
+      env:
+          DATABASE_URL: "postgresql://postgres:password1@localhost:5432/todoDb"
+      run: |
+        python -m unittest to_do_api_tests.py
+    - name: Start FastAPI server
+      env:
+        DATABASE_URL: "postgresql://postgres:password1@localhost:5432/todoDb"
+      run: |
+        uvicorn main:app --host 0.0.0.0 --port 8000 &
+        sleep 5
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+         node-version: '20'
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./demoApp
+    - name: Run React Native tests
+      run: npm test -- --watchAll=false
+      working-directory: ./demoApp
+      
+   
