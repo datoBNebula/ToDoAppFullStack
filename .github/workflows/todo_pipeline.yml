@@ -30,7 +30,9 @@ jobs:
     - name: Run FastAPI tests
       env:
           DATABASE_URL: sqlite:///test.db
-      run: python -m unittest to_do_api_tests.py
+      run: |
+        rm -f test.db
+        python -m unittest to_do_api_tests.py
 
   frontend-job:
     runs-on: ubuntu-latest
