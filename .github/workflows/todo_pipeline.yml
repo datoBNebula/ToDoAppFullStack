@@ -1,0 +1,45 @@
+name: CI for FastAPI and React Native
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  backend-job:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./toDofastApi-back
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10, 3.11]	 
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run FastAPI tests
+      run: python -m unittest to_do_api_tests.py
+
+  frontend-job:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./demoApp
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - name: Install dependencies
+      run: npm install
+    - name: Run React Native tests
+      run: npm test
