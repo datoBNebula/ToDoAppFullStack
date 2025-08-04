@@ -36,7 +36,6 @@ const [open, setOpen] = useState(false);
         status: newTask.status
     }
     setTasks(prev=>[...prev, task])
-    console.log(await postTask(task))
   }
 
   const addHandler = ()=>{
