@@ -38,7 +38,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run FastAPI tests
       env:
-          DATABASE_URL: sqlite:///test.db
+          DATABASE_URL: "postgresql://postgres:postgres_dato_2004@localhost:5432/todoDb"
       run: |
         rm -f test.db
         python -m unittest to_do_api_tests.py
