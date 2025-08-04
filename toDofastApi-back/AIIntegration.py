@@ -9,7 +9,7 @@ from typing_extensions import TypedDict
 
 
 
-os.environ["GROQ_API_KEY"] = "key"
+os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 model = init_chat_model("llama3-8b-8192", model_provider="groq")
 
 
