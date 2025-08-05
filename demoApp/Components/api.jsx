@@ -52,7 +52,7 @@ export const UpdateTask = async (taskId, task)=>{
 
 
 export const FetchAiSuggestions = async(tasks)=>{
-    let baseApiUrl = "http://127.0.0.1:8000/tasks/make/suggestions?tasks=";
+    let baseApiUrl = "http://localhost:8000/tasks/make/suggestions?tasks=";
     let taskNames = tasks.map(task=>task.name.split(' ').join('%20')).join(',')
     let completeUrl = baseApiUrl + taskNames
     const response = await axios.get(completeUrl, {

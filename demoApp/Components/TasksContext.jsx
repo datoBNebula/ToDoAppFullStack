@@ -9,6 +9,7 @@ const AppProvider = ({ children }) => {
   const [openMenu, setOpenMenu] = useState(false)
   const [editVisible, setEditVisible] = useState(false)
   const [suggestions, setSuggestions] = useState(false)
+  const [editingTask, setEditingTask] = useState(null)
 
   useEffect(()=>{
     const fetchTasks = async ()=>{
@@ -18,7 +19,7 @@ const AppProvider = ({ children }) => {
     }
 
     const fetchSuggestions = async()=>{
-      const response = await FetchAiSuggestions(tasks.slice(-6, -1))
+      const response = await FetchAiSuggestions(tasks.slice(-5))
       setSuggestions(response.data.tasks)
       console.log(response)
     }
@@ -30,7 +31,7 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider value={{
        visible, setVisible, tasks, setTasks, taskId, setTaskId, openMenu, setOpenMenu, 
-       editVisible, setEditVisible, suggestions, setSuggestions
+       editVisible, setEditVisible, suggestions, setSuggestions, editingTask, setEditingTask
        }}>
       {children}
     </AppContext.Provider>

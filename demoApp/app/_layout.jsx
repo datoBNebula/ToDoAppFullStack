@@ -1,7 +1,7 @@
 import { Stack, Tabs } from "expo-router";
 import AppProvider from "../Components/TasksContext";
 import { useRouter } from "expo-router";
-import { Button, View, StyleSheet } from "react-native";
+import { Button, View, StyleSheet, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -20,7 +20,7 @@ export default function RootLayout(){
     // tabBarInactiveBackgroundColor: 'white',
     // tabBarInactiveTintColor: 'yellow',
     tabBarStyle: {
-        backgroundColor:'rgba(223, 197, 141, 1)',
+        backgroundColor:'rgba(116, 126, 126, 1)',
           
     },
     headerShown: false,
@@ -33,7 +33,7 @@ export default function RootLayout(){
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <AntDesign size={28} name="home" color={'gray'} />,
+          tabBarIcon: ({ color }) => <AntDesign size={28} name="home" color={'rgba(56, 53, 53, 1)'} />,
         }}
       />
 
@@ -41,7 +41,7 @@ export default function RootLayout(){
         name="TasksPage"
         options={{
           title: 'tasks',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="tasks" color={'gray'} />,
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name="tasks" color={'rgba(56, 53, 53, 1)'} />,
         }}
       />
 

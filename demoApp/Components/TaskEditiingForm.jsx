@@ -38,14 +38,17 @@ export default function TaskEditingForm({task}){
 
 const styles = StyleSheet.create({
     mainContainer: {
-      backgroundColor: "gold",
+      backgroundColor: "rgba(166, 160, 160, 1)",
       width: 300,
-      height: 300,
+      height: 350,
       padding: 10,
+      borderRadius: 15,
+      textShadowRadius: 5,
+      borderWidth: 3,
       display: "flex",
       justifyContent: 'space-between',
       position: 'absolute',
-      top: '50%',
+      top: '40%',
       left: '50%',
       transform:[
         {translateX: -150},

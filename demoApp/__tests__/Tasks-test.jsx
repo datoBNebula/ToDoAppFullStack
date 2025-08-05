@@ -8,8 +8,8 @@ import { AppContext } from "../Components/TasksContext"
 
 
 describe(
-'dfdd', ()=>{
-    test('fgdfg', ()=>{
+'very easy test', ()=>{
+    test('button text check', ()=>{
             const mockContext = {
             visible: true,
             setVisible: jest.fn(),
@@ -44,6 +44,26 @@ describe(
 
         expect(getText).toBeTruthy()
         expect(mockContext.setTasks).toHaveBeenCalled()
+    })
+
+        test('testing task save failing', ()=>{
+            const mockContext = {
+            visible: true,
+            setVisible: jest.fn(),
+            tasks: [],
+            setTasks: jest.fn(),
+            };
+        const { getByText, getByPlaceholderText, getByTestId } = render(<AppContext.Provider value={mockContext}>
+            <TaskCreationForm/>
+        </AppContext.Provider>)
+        const getText = getByText("Save")
+        const name = getByPlaceholderText("name")
+        const description = getByPlaceholderText("description")
+        const difficulty = getByTestId("levelSelector")
+        fireEvent.changeText(name, "this is a test task")
+        fireEvent.press(getText)
+        expect(mockContext.setTasks).not.toHaveBeenCalled()
+
     })
 
     

@@ -28,6 +28,7 @@ const [open, setOpen] = useState(false);
   const {taskId, setTaskId} = useContext(AppContext)
 
     const addItem = async ()=>{
+      if (newTask.name && newTask.description){
     const task = {
         name: newTask.name,
         id: taskId,
@@ -36,6 +37,7 @@ const [open, setOpen] = useState(false);
         status: newTask.status
     }
     setTasks(prev=>[...prev, task])
+  }
   }
 
   const addHandler = ()=>{
@@ -84,10 +86,14 @@ const [open, setOpen] = useState(false);
 
 const styles = StyleSheet.create({
     mainContainer: {
-      backgroundColor: "gold",
+      backgroundColor: "rgba(166, 160, 160, 1)",
       width: 300,
       height: 300,
-      padding: 10,
+      borderRadius: 15,
+      textShadowColor: 'rgba(121, 94, 94, 1)',
+      borderWidth: 3,
+      textShadowRadius: 5,
+      padding: 20,
       display: "flex",
       justifyContent: 'space-between',
       position: 'absolute',

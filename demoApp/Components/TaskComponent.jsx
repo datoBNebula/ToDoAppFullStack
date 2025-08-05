@@ -8,6 +8,17 @@ export default function TaskComponent({task }){
 
     const [visible, setVisible] = useState(false)
 
+    let backgroundColor  = null
+    switch (task.status){
+        case 'to do':
+            backgroundColor = 'rgba(193, 182, 182, 1)'; break;
+        case 'in-progress':
+            backgroundColor = 'rgba(223, 168, 16, 1)'; break;
+        case 'done': 
+            backgroundColor = 'rgba(99, 186, 49, 1)'; break
+        
+    }
+
         const styles = StyleSheet.create({
             task:{
                     display: 'flex', 
@@ -15,14 +26,16 @@ export default function TaskComponent({task }){
                     width: '100%', 
                     padding: 10, 
                     justifyContent: 'space-between',
-                     backgroundColor: 'rgba(149, 185, 222, 1)'
+                     backgroundColor: backgroundColor,
+                     borderRadius: 13
             },
             text: { 
                 color: 'black',
-                fontSize: 25,
+                fontSize: 15,
                 display: 'flex',
                 flexDirection: 'row',
-                alignContent: 'center'
+                alignContent: 'center',
+                maxWidth: 200
              },
              icons:{
                     display: 'flex',
